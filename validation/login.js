@@ -23,7 +23,6 @@ module.exports = function validateLoginInput(data) {
         errors.email = 'Email field is required';
     }
 
-
     return {
         errors,
         isValid: isEmpty(errors)
