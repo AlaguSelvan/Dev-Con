@@ -23,7 +23,7 @@ router.get("/test", (req, res) =>
     })
 );
 
-// @route GET api/users/register
+// @route post api/users/register
 // @desc Register route
 // @access Public
 
