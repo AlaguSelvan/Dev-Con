@@ -18,6 +18,14 @@ class Register extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+// push back to dashboard if isnt authenticated
+    componentDidMount() {
+      if(this.props.auth.isAuthenticated) {
+        this.props.history.push('/dashboard');
+      }
+    }
+    
+
     //created a new lifecycle
     componentWillReceiveProps(nextProps) {
       if(nextProps.errors){
