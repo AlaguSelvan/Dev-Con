@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {getCurrentProfile} from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 
-
+ 
 class Dashboard extends Component {
 
     componentDidMount() {
@@ -33,7 +33,6 @@ class Dashboard extends Component {
             <Link to ="/create-profile" className="btn btn-lg btn-info">
             Create Profile
             </Link>
-         
           </div>
         )
       }
