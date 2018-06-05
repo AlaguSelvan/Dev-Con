@@ -23,8 +23,8 @@ import EditProfile from './components/edit-profile/EditProfile';
 
 import './App.css';
 
-// Check for token
-if(localStorage.jwtToken) {
+  // Check for token
+  if(localStorage.jwtToken) {
   //Set auth token header auth
   setAuthToken(localStorage.jwtToken);
   // Decode token and get user info and exp
@@ -61,9 +61,6 @@ class App extends Component {
      </Switch>
      <Switch>
      <PrivateRoute exact path ="/create-profile" component = {CreateProfile} />
-     </Switch>
-     <Switch>
-     <PrivateRoute exact path ="/dashboard" component = {Dashboard} />
      </Switch>
      <Switch>
      <PrivateRoute exact path ="/edit-profile" component = {EditProfile} />

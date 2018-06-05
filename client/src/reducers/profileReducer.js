@@ -5,7 +5,7 @@ const initialState= {
     profiles: null,
     loading: false
 }
-
+ 
 export default function(state = initialState, action){
     switch(action.type){
         case PROFILE_LOADING:

@@ -8,6 +8,8 @@ class Login extends Component {
 
     constructor() {
         super();
+
+        // value changes are set here bind just shows onchange when typed and submitted.
         this.state = {
             email: '',
             password: '',
