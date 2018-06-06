@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-import InputGroup from '../common/InputGroup';
-import SelectListGroup from '../common/SelectListGroup';
-import {addEducation} from '../../actions/profileActions';
+import addEducation from '../../actions/profileActions';
 
 class AddExperience extends Component {
     constructor(props) {
-        super(props);
+    super(props);
    this.state = {
-     displaySocialInputs: false,
      company: '',
+     title: '',
      location: '',
      from: '',
      to: '',
-     current: '',
+     current: false,
      description: '',
-     errors: {}
+     errors: {},
+     disabled: false
    };
           this.onChange = this.onChange.bind(this);
           this.onSubmit = this.onSubmit.bind(this);
+          this.onCheck = this.onCheck.bind(this);
 
     }
 
@@ -35,17 +35,7 @@ class AddExperience extends Component {
     onSubmit(e) {
       e.preventDefault();
       
-      const registerData = {
-        company: this.state.company,
-        location: this.state.location,
-        from: this.state.from,
-        to: this.state.to,
-        current: this.state.current,
-        description: this.state.description,
-              
-      }
-
-      this.props.AddExperience(registerData, this.props.history);
+     
 
     }
 
@@ -53,83 +43,94 @@ class AddExperience extends Component {
       this.setState({[e.target.name]: e.target.value});
     }
 
+    onCheck(e) {
+      this.setState({
+        disabled: !this.state.disabled,
+        current: !this.state.current
+      });
+    }
+
   render() {
-      const {errors, displaySocialInputs} = this.state;
+      const {errors} = this.state;
 
 
 
     return (
       
-      <div className="create-profile">
+      <div className="add-experience">
     <div className="container">
       <div className="row">
         <div className="col-md-8 m-auto">
-          <a href="/dashboard" className="btn btn-light">
+          <Link to="/dashboard" className="btn btn-light">
             Go Back
-          </a>
-          <h1 className="display-4 text-center">Edit Your Profile</h1>
-          <p className="lead text-center">Let's get some information to make your profile stand out</p>
+          </Link>
+          <h1 className="display-4 text-center">Add Experience</h1>
+          <p className="lead text-center">Add any job or position or position that you have had in the past or current</p>
           <small className="d-block pb-3">* required field</small>
-          <form onSubmit={this.onSubmit}>
-          <TextFieldGroup
-            placeholder="* company"
-            name="company"
-            value={this.state.company} 
-            onChange = {this.onChange}
-            error={errors.company}
-            info = "A unique school for your profile URL. Your full name, company name, nickname"
-             />
-             <SelectListGroup
-             placeholder = "location"
-             name = "location"
-             value = {this.state.location}
-             onChange = {this.onChange}
-             error = {errors.location}
-             info = "Give us an idea of where you are at in your career" />
+          <form onSubmit ={this.onSubmit}>
+           <TextFieldGroup
+              placeholder="Company"
+              name="company"
+              value={this.state.company}
+              onChange={this.state.onChange}
+              error={errors.company}
+              />
              <TextFieldGroup
-             placeholder = "Company"
-             name = "from"
-             value = {this.state.from}
-             onChange = {this.onChange}
-             error = {errors.from}
-             info = "Could be your own company or one you work for" />
-            <TextFieldGroup
-            placeholder = "to"
-            name = "to"
-            value = {this.state.to}
-            onChange = {this.onChange}
-            error = {errors.to}
-            info = "City or city & state suggested" />
+              placeholder="Job Title"
+              name="title"
+              value={this.state.title}
+              onChange={this.state.onChange}
+              error={errors.title}
+              />
              <TextFieldGroup
-             placeholder = "current"
-             name = "current"
-             value = {this.state.current}
-             onChange = {this.onChange}
-             error = {errors.current}
-             info = "Please use comma seperated values (eg. HTML, CSS, JAVASCRIPT, PHP" />
-             <TextFieldGroup
-             placeholder = "Github Username"
-             name = "description"
-             value = {this.state.description}
-             onChange = {this.onChange}
-             error = {errors.description}
-             info = "If you want your latest repos and a Github link, include your username" />
-            
-             <div className="mb-3">
-                <button
-                type="button"
-                 onClick={()=>{
-                  this.setState(prevState =>({
-                    displaySocialInputs: !prevState.displaySocialInputs
-                  }))
-                }} className="btn btn-light">
-                  Add Social Network Links
-                </button>
-                <span className="text-muted">Optional</span>
-            </div>
-            {socialInputs}
-          <input type="submit" value="Submit" className="btn btn-info btn-block"/>
-          </form>
+              placeholder="location"
+              name="location"
+              value={this.state.location}
+              onChange={this.state.onChange}
+              error={errors.location}
+              />
+              <h6>From Date</h6> 
+              <TextFieldGroup
+              placeholder="from"
+              name="from"
+              type="date"
+              value={this.state.from}
+              onChange={this.state.onChange}
+              error={errors.from}
+              />
+               <h6>To Date</h6>
+               <TextFieldGroup
+              placeholder="to"
+              name="to"
+              type="date"
+              value={this.state.to}
+              onChange={this.state.onChange}
+              error={errors.to}
+              disabled={this.state.disabled ? 'disabled': ''}
+              />
+              <div className="form-check mb-4">
+                <input 
+                type="checkbox"
+                className="form-check-input"
+                name="current"
+                value={this.state.current}
+                checked={this.state.current}
+                onChange={this.onCheck}
+                id="current"
+                 />
+                 <label htmlFor="current" className="form-check-label">
+                  Current Job
+                 </label>
+              </div>
+               <TextFieldGroup
+              placeholder="description"
+              name="description"
+              value={this.state.description}
+              onChange={this.state.onChange}
+              error={errors.description}
+              />
+              <input type="submit" value="Submit" className="btn btn-info btn-block mt-4"  />            
+          </form>          
         </div>
       </div>
     </div>
@@ -139,7 +140,7 @@ class AddExperience extends Component {
 }
 
 AddExperience.propTypes = {
-    addExperience: PropTypes.func.isRequired,
+   
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 }
@@ -149,4 +150,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { addExperience })(withRouter(AddExperience));
+export default connect(mapStateToProps)(withRouter(AddExperience));

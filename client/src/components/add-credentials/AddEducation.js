@@ -7,7 +7,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import {addEducation} from '../../actions/profileActions';
-
+  
 class AddEducation extends Component {
     constructor(props) {
         super(props);
