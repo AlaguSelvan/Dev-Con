@@ -100,19 +100,19 @@ const ProfileSchema = new Schema({
             type: String
         },
         twitter: {
-
+            type: String
         },
         facebook: {
-
+            type: String
         },
         linkedin: {
-
+            type: String
         },
         instagram: {
-
+            type: String
         },
         steam: {
-
+            type: String
         },
     },
     date: {

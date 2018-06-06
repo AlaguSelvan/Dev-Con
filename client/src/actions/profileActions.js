@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_PROFILE, PROFILE_LOADING,  CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER } from './types';
+import {GET_PROFILE, PROFILE_LOADING,  CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER, ADD_EDUCATION } from './types';
  
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
@@ -49,8 +49,26 @@ export const deleteAccount = () => dispatch => {
         })    
     )
     };
-};
+};  
 
+
+// Add detail to profile
+export const addEducation = () => dispatch => {
+    if(window.confirm('Are you sure? This can NOT be undone!')) {
+        axios
+            .delete('api/profile/experience')
+            .then(res=>dispatch({
+                type: ADD_EDUCATION,
+                payload: {}
+        })
+    ).catch(err=>
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })    
+    )
+    };
+};  
 
 //Profile Loading
 export const setProfileLoading = () =>{
