@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 class Experience  extends Component {
   render() {
-      const experience = this.props.experience.map(exp => {
+      const experience = this.props.experience.map(exp => (
           <tr key={exp._id}>
             <td>{exp.company}</td>
             <td>{exp.title}</td>
@@ -14,7 +14,7 @@ class Experience  extends Component {
             <button className="btn btn-danger">Delete</button>
             </td>
           </tr>
-      })
+      ))
     return (
       <div>
         <h4 className="mb-4">Experience Credentials</h4>
