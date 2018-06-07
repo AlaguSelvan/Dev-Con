@@ -24,10 +24,10 @@ export default function(state = initialState, action){
                 ...state,
                 profile: null
             }
-            case GET_PROFILES:
+        case GET_PROFILES:
             return {
                 ...state,
-                profile: action.payload,
+                profiles: action.payload,
                 loading: false
             }
         
