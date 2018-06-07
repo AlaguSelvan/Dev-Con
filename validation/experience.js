@@ -23,6 +23,10 @@ module.exports = function validateExperienceInput(data) {
         errors.from = 'From date field is required';
     }
 
+    // if (((data.to) > (data.from))) {
+    //     errors.from = 'Specify a proper date';
+    // }
+
     return {
         errors,
         isValid: isEmpty(errors)
