@@ -1,15 +1,13 @@
 import axios from 'axios';
 
-// takes care of adding token to every request when u are logged in
+const setAuthToken = token => {
+  if (token) {
+    axios.defaults.headers.common['x-auth-token'] = token;
+    localStorage.setItem('token', token);
+  } else {
+    delete axios.defaults.headers.common['x-auth-token'];
+    localStorage.removeItem('token');
+  }
+};
 
-const SetAuthToken = token => {
-    if(token) { 
-        //Apply to every request
-        axios.defaults.headers.common['Authorization'] = token;
-    } else {
-        //Delete Auth header
-        delete axios.defaults.headers.common['Authorization'];
-    }
-}
-
-export default SetAuthToken;
+export default setAuthToken;
