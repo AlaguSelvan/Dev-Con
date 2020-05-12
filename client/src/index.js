@@ -5,11 +5,11 @@ import App from './App';
 
 
 
-const rootElement = document.getElementById('root');
-if (rootElement.hasChildNodes()) {
-  hydrate(<App />, rootElement);
-} else {
-  render(<App />, rootElement);
-}
+// const rootElement = document.getElementById('root');
+// if (rootElement.hasChildNodes()) {
+//   hydrate(<App />, rootElement);
+// } else {
+//   render(<App />, rootElement);
+// }
 
-// render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
